@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Postman学習ノート</title>
+</head>
+<body>
+  <h1>Postman 学習ノート</h1>
+
+  <h2>第1週：Postmanの基礎理解</h2>
+  <p>
+    APIとは「アプリケーション同士のやりとりの窓口」のことで、Postmanはそのやりとりを可視化・テストできるツールです。<br>
+    第1週では以下のことを学習しました：
+  </p>
+  <ul>
+    <li>PostmanのインストールとUI操作</li>
+    <li>リクエスト（GET/POST）とは何か</li>
+    <li>https://jsonplaceholder.typicode.com や worldtimeapi.org などのモックAPIを使ったリクエスト</li>
+    <li>レスポンスの形式（JSON）とその読み方</li>
+    <li>クエリパラメータ・ヘッダー・ボディの違い</li>
+  </ul>
+  <p>
+    → 「こういうデータをください」とサーバーにお願いする感覚を掴みました。
+  </p>
+
+  <h2>第2週：レスポンス検証とテストスクリプト入門</h2>
+  <p>
+    APIから返ってくるレスポンスが「正しいか」を自動チェックする方法を学びました。これにより、バグを早期に発見できるようになります。
+  </p>
+  <ul>
+    <li><strong>pm.test()</strong> でテスト名を定義</li>
+    <li><strong>pm.expect()</strong> で期待する値を定義</li>
+    <li>ステータスコード（例: 200 OK）の検証</li>
+    <li>JSONレスポンスのキーの有無・値の検証</li>
+  </ul>
+  <p>
+    例：
+    <pre>
+pm.test("ステータスコードは200", function () {
+  pm.response.to.have.status(200);
+});
+
+pm.test("1番目のユーザー名がLeanne Graham", function () {
+  const json = pm.response.json();
+  pm.expect(json[0].name).to.eql("Leanne Graham");
+});
+    </pre>
+  </p>
+  <p>
+    → Postmanでテストを書くことにより、実務でのAPI検証や不具合の早期発見ができるようになる準備が整いました。
+  </p>
+
+</body>
+</html>
